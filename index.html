@@ -181,9 +181,9 @@
 
 						<div id="form-success" class="card border-0 text-center d-none" role="alert">
 							<div class="card-body">
-								<h4><i class="text-success align-middle fa fa-fw fa-2x fa-check-circle"></i> Thanks for registering your interest!</h4>
+								<h4><i class="text-success align-middle fa fa-fw fa-2x fa-check-circle"></i> Thanks for Registering!</h4>
 								<small class="text-muted">Confirmation has been sent to: <span id="confirm-email" class="text-info"></span><br/>
-									(Please check your junk mail)
+									(Please note the information regarding Junk/Spam)
 								</small>
 							</div>
 						</div>
@@ -245,6 +245,7 @@
 	const $formSuccess = $('#form-success');
 	const $formErrors = $('#form-errors');
 	const $confirmEmail = $('#confirm-email');
+  const $submitButton = $("button[type='submit']");
 
 	$enquiryForm.submit(function (event) {
 
@@ -284,10 +285,8 @@
 	});
 
 	function startProgress() {
-		$("button[type='submit']").toggleClass('disabled', true).prop('disabled', true);
-
-		// Todo - replace send with circle and spin
-		$('.fa-circle-o-notch').toggleClass('fa-spin', true);
+	  $submitButton.toggleClass('disabled', true).prop('disabled', true);
+	  $submitButton.find('i').removeClass('fa-send').addClass('fa-circle-o-notch fa-spin');
 
 		$('input').toggleClass('is-invalid', false);
 	}
@@ -295,9 +294,8 @@
 	function stopProgress() {
 		$("button[type='submit']").toggleClass('disabled', false).prop('disabled', false);
 
-		// Todo - replace circle with send
-		$('.fa-circle-o-notch').toggleClass('fa-spin', false);
-	}
+	  $submitButton.find('i').addClass('fa-send').removeClass('fa-circle-o-notch fa-spin');
+  }
 
 	function setErrorState(response) {
 		console.error(response);
