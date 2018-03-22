@@ -1,8 +1,8 @@
 *.iml
-*.png
-*.svg
-*.ico
-browserconfig.xml
-site.webmanifest
+**/*.png
+**/*.svg
+**/*.ico
+site/browserconfig.xml
+site/site.webmanifest
 
-images/
+site/images/
