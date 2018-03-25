@@ -30,8 +30,7 @@ $enquiryForm.submit(function (event) {
 	$formErrors.toggleClass('d-none', true);
 	$formErrors.find('ul').empty();
 
-	// $.post("http://api.dorkingladiesjoggers.co.uk/enquiries/v2/club-enquiry/emails/" + email, $enquiryForm.serialize())
-	$.post("http://192.168.64.4:30005/enquiries/v2/club-enquiry/emails/" + email, $enquiryForm.serialize())
+	$.post("http://api.dorkingladiesjoggers.co.uk/enquiries/v2/club-enquiry/emails/" + email, $enquiryForm.serialize())
 		.done(function (response) {
 			console.log(response);
 			setSuccessState(email);
