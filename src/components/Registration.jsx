@@ -1,8 +1,32 @@
 import React from 'react';
+import $ from "jquery";
+
+import {ENQUIRIES_API_URL} from "../site-constants";
 
 export default class Registration extends React.Component
 {
-	render() {
+	constructor(props)
+	{
+		super(props);
+
+		// This binding is necessary to make `this` work in the callback
+		this.onClick = this.onClick.bind(this);
+	}
+
+	componentDidMount()
+	{
+		this.setState(
+			{
+				$enquiryForm: $('#enquiry-form'),
+				$formSuccess: $('#form-success'),
+				$formErrors: $('#form-errors'),
+				$confirmEmail: $('#confirm-email'),
+				$submitButton: $("button[type=submit]")
+			})
+	}
+
+	render()
+	{
 		return (
 			<div className="row m-4 pt-4 pb-4 align-items-center">
 
@@ -51,7 +75,7 @@ export default class Registration extends React.Component
 									</div>
 									<input type="email" id="email" name="email" autoComplete="home email" className="form-control" placeholder="me@home.com" required/>
 										<div className="input-group-append">
-											<button type="submit" className="btn btn-info"><i className="fa fa-fw fa-send" style={{'WebkitFilter': 'blur(0)'}}/></button>
+											<button type="submit" onClick={this.onClick} className="btn btn-info"><i className="fa fa-fw fa-send" style={{'WebkitFilter': 'blur(0)'}}/></button>
 										</div>
 								</div>
 							</div>
@@ -77,7 +101,87 @@ export default class Registration extends React.Component
 				</div>
 			</div>
 
-	);
+		);
 	}
-}
 
+	onClick(event)
+	{
+		event.preventDefault();
+
+		this.startProgress();
+
+		const email = this.state.$enquiryForm.find("input[name='email']").val();
+
+		this.state.$enquiryForm.toggleClass('d-none', false);
+		this.state.$formSuccess.toggleClass('d-none', true);
+		this.state.$formErrors.toggleClass('d-none', true);
+		this.state.$formErrors.find('ul').empty();
+
+		$.post(ENQUIRIES_API_URL + email, this.state.$enquiryForm.serialize())
+			.done( (response) => {
+				console.log(response);
+
+				this.setSuccessState(email);
+			})
+			.fail((jqxhr, textStatus, error) => {
+				if (jqxhr.responseJSON === undefined) {
+					console.error(textStatus);
+					console.error(error);
+
+					const list = this.state.$formErrors.find('ul');
+					list.append('<li>Oops! Due to a technical issue we were unable to process your request at this time. Please try again later or contact us using the details at the top of the page while we work to resolve it.</li>');
+					this.state.$formErrors.toggleClass('d-none', false);
+				}
+				else {
+					this.setErrorState(jqxhr.responseJSON);
+				}
+			})
+			.always(() => this.stopProgress());
+
+	}
+
+	startProgress()
+	{
+		this.state.$submitButton.toggleClass('disabled', true).prop('disabled', true);
+		this.state.$submitButton.find('i').removeClass('fa-send').addClass('fa-circle-o-notch fa-spin');
+
+		$('input').toggleClass('is-invalid', false);
+	}
+
+	stopProgress()
+	{
+		this.state.$submitButton.toggleClass('disabled', false).prop('disabled', false);
+
+		this.state.$submitButton.find('i').addClass('fa-send').removeClass('fa-circle-o-notch fa-spin');
+	}
+
+	setSuccessState(email)
+	{
+		this.state.$enquiryForm.toggleClass('d-none', true);
+		this.state.$formSuccess.toggleClass('d-none', false);
+		this.state.$confirmEmail.text(email);
+	}
+
+	setErrorState(response)
+	{
+		console.error(response);
+
+		this.state.$enquiryForm.toggleClass('d-none', false);
+		this.state.$formSuccess.toggleClass('d-none', true);
+		this.state.$formErrors.toggleClass('d-none', false);
+
+		const list = this.state.$formErrors.find('ul');
+
+		const items = response.map(function (element) {
+			return '<li>' + element.errorMessage + '</li>';
+		});
+
+		list.append(items);
+
+		response.forEach(function (element) {
+			const input = $("input[name='" + element.fieldName + "']");
+			input.toggleClass('is-invalid', true);
+		})
+	}
+
+}

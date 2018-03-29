@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const {INDEX_TITLE, INDEX_META_DESCRIPTION} = require('./src/site-constants');
 
 module.exports = {
 	output: {
@@ -34,7 +35,9 @@ module.exports = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: path.resolve(__dirname + '/src/index.html')
+			template: path.resolve(__dirname + '/src/index.html'),
+			title: INDEX_TITLE,
+			description: INDEX_META_DESCRIPTION
 		})
 	]
 };

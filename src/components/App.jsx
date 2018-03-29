@@ -1,17 +1,21 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
+import {FACEBOOK_URL, SITE_EMAIL_ADDRESS} from '../site-constants';
 import Header from "./Header.jsx";
 import Main from "./Main.jsx";
+import Footer from "./Footer.jsx";
+
 import TokenClaimFailed from "./TokenClaimFailed.jsx";
 import TokenClaimOk from "./TokenClaimOk.jsx";
-import Footer from "./Footer.jsx";
 
 export default class App extends React.Component {
 	render() {
 		return (
 			<div>
-				<Header showLogo={location.pathname === '/'}/>
+				<Header showLogo={location.pathname === '/'}
+				        emailAddress={SITE_EMAIL_ADDRESS}
+				        facebookUrl={FACEBOOK_URL}/>
 				<Router>
 					<Switch>
 						<Route exact path="/" component={Main}/>
@@ -19,7 +23,7 @@ export default class App extends React.Component {
 						<Route path="/token-claim-ok" component={TokenClaimOk}/>
 					</Switch>
 				</Router>
-				<Footer style="{{'font-size': '.75em'}}" className="mt-3"/>
+				<Footer/>
 			</div>
 		);
 	}

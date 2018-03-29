@@ -3,7 +3,7 @@ import React from 'react';
 export default class Footer extends React.Component {
 	render() {
 		return (
-			<footer>
+			<footer className="mt-3" style={{fontSize: '.75em'}}>
 				<div className="container-fluid bg-light text-secondary">
 					<div className="row pt-3 text-center justify-content-center">
 						<div className="col-4 col-sm-2">
