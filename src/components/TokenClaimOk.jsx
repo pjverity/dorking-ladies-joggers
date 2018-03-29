@@ -1,12 +1,12 @@
 import React from 'react';
 
-export default class TCOkMain extends React.Component {
+export default class TokenClaimOk extends React.Component {
 	render() {
 		return (
 			<main>
 				<div className="container">
 
-					<h1 className="p-4 m-4 text-center"><i class="text-success fa fa-fw fa-check-circle"/> Successfully Credited Your Free Token!</h1>
+					<h1 className="p-4 m-4 text-center"><i className="text-success fa fa-fw fa-check-circle"/> Successfully Credited Your Free Token!</h1>
 					<p className="text-center">
 						You're all set to go. We look forward to seeing you!
 					</p>

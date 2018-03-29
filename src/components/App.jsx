@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Route} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 import Header from "./Header.jsx";
 import Main from "./Main.jsx";
@@ -11,13 +11,13 @@ export default class App extends React.Component {
 	render() {
 		return (
 			<div>
-				<Header/>
+				<Header showLogo={location.pathname === '/'}/>
 				<Router>
-					<div>
+					<Switch>
 						<Route exact path="/" component={Main}/>
 						<Route path="/token-claim-failed" component={TokenClaimFailed}/>
 						<Route path="/token-claim-ok" component={TokenClaimOk}/>
-					</div>
+					</Switch>
 				</Router>
 				<Footer style="{{'font-size': '.75em'}}" className="mt-3"/>
 			</div>

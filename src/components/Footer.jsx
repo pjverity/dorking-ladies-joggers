@@ -6,7 +6,7 @@ export default class Footer extends React.Component {
 			<footer>
 				<div className="container-fluid bg-light text-secondary">
 					<div className="row pt-3 text-center justify-content-center">
-						<div className="col-2">
+						<div className="col-4 col-sm-2">
 							Mens
 							<ul className="list-unstyled">
 								<li><a href="http://www.reigatemensjoggers.co.uk">Reigate</a></li>
@@ -21,7 +21,7 @@ export default class Footer extends React.Component {
 								<li><a href="http://www.oxtedladiesjoggers.co.uk">Oxted</a></li>
 							</ul>
 						</div>
-						<div className="col-2">
+						<div className="col-4 col-sm-2">
 							Juniors
 							<ul className="list-unstyled">
 								<li><a href="http://www.reigatejuniorjoggers.co.uk">Reigate</a></li>

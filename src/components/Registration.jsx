@@ -18,15 +18,14 @@ export default class Registration extends React.Component
 
 				<div className="col-md-6 col-sm-12">
 					<form id="enquiry-form">
+
 						<div className="row form-group">
-
-
-							<div className="col-6">
+							<div className="col-12 col-md-6">
 								<input type="text" className="form-control" name="firstName" autoComplete="home firstName" placeholder="First name" required/>
 							</div>
 
 
-							<div className="col-6">
+							<div className="col-12 mt-3 col-md-6 mt-md-0">
 								<input type="text" className="form-control" name="lastName" autoComplete="home lastName" placeholder="Last name" required/>
 							</div>
 						</div>
