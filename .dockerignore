@@ -1,7 +1,3 @@
-node_modules/
-src/
-.babelrc
-.gitignore
-*.iml
-*.json
-*.js
+**/*
+!dist/
+!default.conf
