@@ -4,7 +4,7 @@ const INDEX_META_DESCRIPTION = 'Home of Ladies Run Club in Dorking, Surrey';
 
 const FACEBOOK_URL = '/dorkingladiesjoggers';
 const SITE_EMAIL_ADDRESS = 'admin@dorkingladiesjoggers.co.uk';
-const ENQUIRIES_API_URL = 'http://api.dorkingladiesjoggers.co.uk/enquiries/v2/club-enquiry/emails/';
+const ENQUIRIES_API_URL = 'http://www.dorkingladiesjoggers.co.uk/enquiries/v2/club-enquiry/emails/';
 
 module.exports = {
 	INDEX_TITLE,
