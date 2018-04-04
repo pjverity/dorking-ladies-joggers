@@ -7,7 +7,7 @@ export default class Main extends React.Component {
 	render() {
 		return (
 			<main>
-				<div className="container">
+				<div class="container">
 					<Schedules/>
 					<hr/>
 					<Registration/>

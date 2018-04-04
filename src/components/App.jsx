@@ -13,9 +13,13 @@ export default class App extends React.Component {
 	render() {
 		return (
 			<div>
-				<Header showLogo={location.pathname === '/'}
-				        emailAddress={SITE_EMAIL_ADDRESS}
-				        facebookUrl={FACEBOOK_URL}/>
+				<Match path="/">
+					{ ({ matches, path, url }) => (
+						<Header showLogo={path === '/'}
+						        emailAddress={SITE_EMAIL_ADDRESS}
+						        facebookUrl={FACEBOOK_URL}/>
+					) }
+				</Match>
 				<Router>
 					<Switch>
 						<Route exact path="/" component={Main}/>
