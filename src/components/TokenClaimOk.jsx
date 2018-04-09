@@ -1,7 +1,10 @@
-import React from 'react';
+import { h, render, Component } from 'preact';
 
-export default class TokenClaimOk extends React.Component {
-	render() {
+// Tell Babel to transform JSX into h() calls:
+/** @jsx h */
+
+export default class TokenClaimOk extends Component {
+	render(props, state) {
 		return (
 			<main>
 				<div class="container">

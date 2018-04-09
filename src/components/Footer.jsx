@@ -1,7 +1,10 @@
-import React from 'react';
+import { h, render, Component } from 'preact';
 
-export default class Footer extends React.Component {
-	render() {
+// Tell Babel to transform JSX into h() calls:
+/** @jsx h */
+
+export default class Footer extends Component {
+	render(props, state) {
 		return (
 			<footer class="mt-3" style={{fontSize: '.75em'}}>
 				<div class="container-fluid bg-light text-secondary">

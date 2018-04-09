@@ -1,9 +1,13 @@
-import React from 'react';
+import { h, render, Component } from 'preact';
+
+// Tell Babel to transform JSX into h() calls:
+/** @jsx h */
+
 import $ from "jquery";
 
 import {ENQUIRIES_API_URL} from "../site-constants";
 
-export default class Registration extends React.Component
+export default class Registration extends Component
 {
 	constructor(props)
 	{
@@ -25,7 +29,7 @@ export default class Registration extends React.Component
 			})
 	}
 
-	render()
+	render(props, state)
 	{
 		return (
 			<div class="row m-4 pt-4 pb-4 align-items-center">
