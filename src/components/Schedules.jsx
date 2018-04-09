@@ -3,7 +3,20 @@ import { h, render, Component } from 'preact';
 // Tell Babel to transform JSX into h() calls:
 /** @jsx h */
 
+import {SITE_API_URL} from '../site-constants';
+
+let SCHEDULES_API_URL = SITE_API_URL + '/schedules/search/activeSchedules';
+
 export default class Schedules extends Component {
+
+	constructor(props) {
+		super(props);
+		this.state = {schedules: []};
+	}
+
+	componentDidMount() {
+		$.get(SCHEDULES_API_URL, (data) => this.setState(data._embedded));
+	}
 
 	render(props, state) {
 		return (
@@ -24,19 +37,26 @@ export default class Schedules extends Component {
 						<table class="table table-sm table-striped">
 							<thead>
 							<tr>
-								<th scope="col">Day</th>
-								<th scope="col">Time</th>
+								<th scope="col">When</th>
+								<th scope="col">Duration</th>
 								<th scope="col">Group</th>
-								<th scope="col">Meeting Place</th>
+								<th scope="col">Where</th>
 							</tr>
 							</thead>
 							<tbody>
-							<tr>
-								<th scope="row">Wednesday</th>
-								<td>09:15</td>
-								<td>Introduction to Trail Running</td>
-								<td>Dorking Garden Centre, Dorking</td>
-							</tr>
+							{
+								state.schedules.map(schedule =>
+								{
+									return (
+										<tr key={schedule.name}>
+											<th scope="row">{new Date(schedule.commences + 'T' + schedule.time).toLocaleDateString('en-GB', {weekday: 'long', hour: '2-digit', minute: '2-digit'})}</th>
+											<td>{schedule.duration}</td>
+											<td>{schedule.name}</td>
+											<td>{schedule.location}</td>
+										</tr>
+									)
+								})
+							}
 							</tbody>
 						</table>
 					</div>
